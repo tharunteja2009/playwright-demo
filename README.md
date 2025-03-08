@@ -1,7 +1,6 @@
 # playwright-demo
 
-# Execute task 1 :
-
+#Task 1 : Shopping cart
 command to run
 npx playwright test shoping.cart.spec.js
 
