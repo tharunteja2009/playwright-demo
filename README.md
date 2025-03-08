@@ -1,5 +1,8 @@
 # playwright-demo
 
+This project consist of API and Web Tests in shoping.cart.spec.js and petstore-tests.spec.js files
+Tech stack used : Playwright with javascript
+
 # Task 1 : Shopping cart
 command to run
 npx playwright test shoping.cart.spec.js
