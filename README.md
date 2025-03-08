@@ -15,6 +15,6 @@ npx playwright test petstore-tests.spec.js
 1. Pet Not found excetion on API for pets created in previous call observed
 
 
-Note :
+# Note :
 Install node package via Brew or any other package managers to execute Tests
 
