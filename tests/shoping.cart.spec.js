@@ -16,13 +16,13 @@ test("Sign in Flow", async ({ page }) => {
 });
 
 test("Add to Cart flow", async ({ page }) => {
-    const username = "user1741248210752";
-    const password = "pass1741248210752";
-    const productName = "Samsung galaxy s7";
-    const quantity = 3;
     await page.goto('https://www.demoblaze.com', {
         waitUntil: 'domcontentloaded',
     });
+    const username = "user1741248210752";
+    const password = "pass1741248210752";
+    const productName = "Samsung galaxy s6";
+    const quantity = 3;
     const loginPage = new login(page);
     await loginPage.doLogin(username, password);
     console.log("login successfulfor user {}", username);

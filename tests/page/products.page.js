@@ -17,10 +17,9 @@ export class products {
         // Search for the product by name
         for (let i = 0; i < numberOfProducts; i++) {
             const productTitle = await productNames.nth(i).textContent();
-            if (productTitle.trim() === productName) {
+            if (productTitle.trim() == productName) {
                 console.log(`We found the product with name ${productTitle} !!!!!`);
-                await productNames.nth(i).click();  // Click the product
-
+                await productNames.nth(i).click();
                 // Wait for the page to navigate or update
                 await this.page.waitForLoadState("domcontentloaded");
                 productFound = true;
@@ -33,9 +32,6 @@ export class products {
             console.log(`Product with name ${productName} not found.`);
             return;
         }
-
-        // Wait for product page to load or update
-        await this.page.waitForLoadState('domcontentloaded');
         console.log(`Adding product to cart ${quantity} times.`);
 
         // Handle the dialog if it appears
@@ -57,7 +53,7 @@ export class products {
 
 
     async validateCart(productName, quantity) {
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForLoadState('domcontentloaded');
         await this.page.locator("#cartur").click();
         const cartList = await this.page.locator(".success");
         expect(await cartList.count()).toEqual(quantity);

@@ -13,17 +13,17 @@ import { trace } from 'console';
 
 const config = ({
   testDir: './tests',
-  timeout: 50 * 1000,
+  timeout: 60000,
 
   expect: {
     timeout: 40 * 1000,
   },
   reporter: 'html',
   use: {
-    browserName: 'webkit',
+    browserName: 'chromium',
     headless: false,
-    trace: 'on',
-    screenshot: 'off',
+    trace: 'off',
+    screenshot: 'on',
     video: 'retain-on-failure',
   },
 });
