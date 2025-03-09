@@ -12,7 +12,8 @@ command to run
 npx playwright test petstore-tests.spec.js
 
 # Defect or Expected case:
-1. Pet Not found excetion on API for pets created in previous call observed
+1. **Pet Not found exception** on Get Pet API for pets created in previous call observed - Not happening every time. Some times during execution faced it
+   Successful executiion report availble in folder **playwright-report-api case**
 
 
 # Note :
