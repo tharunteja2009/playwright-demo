@@ -22,7 +22,7 @@ const config = ({
   use: {
     browserName: 'chromium',
     headless: false,
-    trace: 'off',
+    trace: 'on',
     screenshot: 'on',
     video: 'retain-on-failure',
   },

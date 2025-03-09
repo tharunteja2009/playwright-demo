@@ -35,10 +35,7 @@ export class products {
         console.log(`Adding product to cart ${quantity} times.`);
 
         // Handle the dialog if it appears
-        this.page.on('dialog', async (dialog) => {
-            console.log(`Dialog message: ${dialog.message()}`);
-            await dialog.accept();
-        });
+
 
         // Click the add-to-cart button the specified number of times
         const addToCartButton = this.page.locator("a[onclick='addToCart(1)']");
@@ -47,20 +44,40 @@ export class products {
             // Wait for the add-to-cart button to be visible and enabled before clicking
             await addToCartButton.waitFor({ state: 'visible' });
             await addToCartButton.click();
+            await this.page.waitForTimeout(3000);
             quantity--;
+            this.page.on('dialog', async (dialog) => {
+                console.log(`Dialog message: ${dialog.message()}`);
+                await dialog.accept();
+            });
         }
     }
 
 
     async validateCart(productName, quantity) {
         await this.page.waitForLoadState('domcontentloaded');
-        await this.page.locator("#cartur").click();
-        const cartList = await this.page.locator(".success");
-        expect(await cartList.count()).toEqual(quantity);
-        for (let i = 0; i < await cartList.count(); i++) {
-            const cartProductName = cartList.nth(i).locator("td").nth(2);
-            expect(cartProductName).toContainText(productName);
+        await this.page.locator("#cartur").click(); // Navigate to cart
+
+        // Ensure the page actually navigated to the cart
+        await this.page.waitForLoadState('domcontentloaded');
+        await this.page.waitForTimeout(2000); // Small wait for cart update (Optional)
+
+        // Ensure cart items are loaded
+        await this.page.waitForSelector("tr.success", { timeout: 5000 });
+
+        const cartList = await this.page.locator("tr.success");
+        const actualQuantity = await cartList.count();
+        console.log(`actual product quantity : ${actualQuantity}`);
+        console.log(`expected product quantity :  ${quantity}`);
+        expect(actualQuantity).toEqual(quantity);
+        // Validate product name in the cart
+        for (let i = 0; i < actualQuantity; i++) {
+            const cartProductName = await cartList.nth(i).locator("td").nth(1).textContent();
+            console.log(`Found in cart: ${cartProductName.trim()}`);
+            expect(cartProductName.trim()).toContain(productName);
         }
+
+        console.log("Cart validation successful.");
     }
 
 }
